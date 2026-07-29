@@ -17,7 +17,21 @@
 - USB cable
 - Samsung phone with KG lock
 
-### Steps / चरण
+### Automated Batch Script (Windows) / ऑटोमेटेड बैच स्क्रिप्ट
+Download **`KG_Bypass.bat`** from this repo and run it as Administrator. It automates all steps:
+1. Detects connected device
+2. Lists Knox/EMM packages
+3. Sets `device_provisioned=0` and reboots
+4. Applies AppOps restrictions to block KG
+5. Restores settings and reboots
+
+```
+KG_Bypass.bat
+```
+
+> Double-click and follow the prompts — no manual ADB commands needed.
+
+### Manual Steps / मैन्युअल चरण
 
 #### Step 1: Set device_provisioned to 0
 ```
@@ -75,7 +89,8 @@ adb shell reboot
 ## Troubleshooting / समस्या समाधान
 
 ### KG returns after reboot
-Run the AppOps commands again while KG is active:
+Re-run `KG_Bypass.bat` (it will repeat the full process).  
+Or manually run the AppOps commands again while KG is active:
 ```
 adb shell settings put global device_provisioned 0
 <wait for reboot, KG should clear>
